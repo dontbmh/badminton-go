@@ -2,17 +2,18 @@ import { JObject, JProperty } from '../decorators';
 
 @JObject()
 class User {
+
     @JProperty()
-    id: number = 0;
+    id: string = '';
 
     @JProperty()
     name: string = '';
 
     @JProperty()
-    status: string = '';
+    bio: string = '';
 
     @JProperty()
-    avatarUrl: string = '';
+    time: number = 0;
 }
 
 export default User;

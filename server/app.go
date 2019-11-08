@@ -1,16 +1,19 @@
 package main
 
 import (
-	"net/http"
+	"log"
 
 	"github.com/labstack/echo"
+	"gopkg.in/mgo.v2"
 )
 
 func main() {
-	e := echo.New()
-	e.Static("/", "web")
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
-	})
-	e.Logger.Fatal(e.Start(":1323"))
+	sess, err := mgo.Dial("localhost")
+	if err != nil {
+		log.Fatalf("db.Open(): %q\n", err)
+	}
+	defer sess.Close()
+	sess.SetMode(mgo.Monotonic, true)
+	r := Request{echo.New(), sess.DB("badminton-go")}
+	r.Listen()
 }

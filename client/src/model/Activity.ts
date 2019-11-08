@@ -1,25 +1,41 @@
 import { JObject, JProperty } from '../decorators';
+import { User } from '.';
 
 @JObject()
 class Activity {
 
     @JProperty()
-    id: number = 0;
+    id: string = '';
 
     @JProperty()
-    attendees: number[] = [];
+    initiator: string = '';
 
     @JProperty()
-    costTtl: number = 0;
+    stadium: string = '';
 
     @JProperty()
-    costPpl: number = 0;
+    fields: string = '';
 
     @JProperty()
     startTime: number = 0;
 
     @JProperty()
     endTime: number = 0;
+
+    @JProperty()
+    maxPpl: number = 0;
+
+    @JProperty()
+    costs: number = 0;
+
+    @JProperty()
+    desc: string = '';
+
+    @JProperty(User)
+    attendees: User[] = [];
+
+    @JProperty()
+    currPpl: number = 0;
 
     @JProperty()
     status: string = '';
