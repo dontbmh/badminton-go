@@ -16,15 +16,13 @@ typescript + react + semantic ui
 
 ## 部署：
 
-single docker container
+docker-compose.yml
 
-mongo + golang + node images
+app + mongo containers
 
 ## Docker:
 ``` docker
-docker build -t badminton-go .
-docker run -p 3050:8080 -d badminton-go 
-docker kill $(docker ps -q)
+docker-compose up -d --build
 docker login
 docker tag golang-echo-react-mongo .
 docker push .
