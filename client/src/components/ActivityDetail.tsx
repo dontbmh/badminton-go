@@ -30,7 +30,7 @@ class ActivityDetail extends React.Component<IProps> {
 
     handleCosts = (e: any) => {
         const { context } = this.state;
-        context.costs = e.target.value;
+        context.costs = parseInt(e.target.value);
         this.setState({ context });
     }
 
@@ -50,7 +50,7 @@ class ActivityDetail extends React.Component<IProps> {
 
     handleMaxPpl = (e: any) => {
         const { context } = this.state;
-        context.maxPpl = e.target.value;
+        context.maxPpl = parseInt(e.target.value);
         this.setState({ context });
     }
 

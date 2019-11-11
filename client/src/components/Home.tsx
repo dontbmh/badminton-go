@@ -26,8 +26,7 @@ class Home extends React.Component<{ user: User, history: any }> {
 
     handleActiveActs = () => {
         const { active } = this.state;
-        this.setState({ active: !active });
-        this.refresh();
+        this.setState({ active: !active }, this.refresh);
     }
 
     handleNewAct = () => {
@@ -35,12 +34,11 @@ class Home extends React.Component<{ user: User, history: any }> {
     }
 
     handleActClose = (save: boolean) => {
-        this.setState({ add: false });
-        if (save) { this.refresh(); }
+        this.setState({ add: false }, save ? this.refresh : null);
     }
 
-    handleActAction = async ({ id, act }) => {
-        const resp = await http.post(`/activity/${id}/${act}`, {}, Activity);
+    handleActAction = async ({ id, action }) => {
+        const resp = await http.post(`/activity/${id}/${action}`, {}, Activity);
         if (resp.status === 200) {
             const { acts } = this.state;
             acts[id] = resp.data as Activity;
@@ -54,7 +52,7 @@ class Home extends React.Component<{ user: User, history: any }> {
         this.props.history.push('/');
     }
 
-    async refresh() {
+    refresh = async () => {
         const { active } = this.state;
         const path = active ? 'active' : 'all';
         const resp = await http.post(`/activity/${path}`, {}, Activity);

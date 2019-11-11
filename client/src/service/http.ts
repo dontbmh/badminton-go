@@ -25,8 +25,6 @@ class HttpClient {
     async request(req: sa.Request): Promise<sa.Response> {
         const res = await req.set('token', this.token);
         const token = res.header.token;
-        console.log(res.header);
-        console.log(res);
         if (token) { this.token = token; }
         return res;
     }
@@ -95,7 +93,7 @@ class HttpClient {
 }
 
 const http = new HttpClient({
-    apiUrl: 'http://10.1.1.233:3050',
+    apiUrl: '.',
     timeout: 5 * 1000,
     timeoutEx: 300 * 1000
 })

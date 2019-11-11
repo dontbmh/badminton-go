@@ -31,7 +31,7 @@ func (r *Request) Listen() {
 	r.POST("/activity/new", r.Bind(CreateActivity))
 	r.POST("/activity/active", r.Bind(GetActiveActivities))
 	r.POST("/activity/all", r.Bind(GetAllActivities))
-	r.POST("/activity/:id", r.Bind(GetActivity))
+	r.POST("/activity/:id/:status", r.Bind(ChangeActivity))
 	r.POST("/activity/:id/join", r.Bind(JoinActivity))
 	r.POST("/activity/:id/leave", r.Bind(LeaveActivity))
 	r.Logger.Fatal(r.Start(":3050"))
@@ -100,7 +100,24 @@ func GetActiveActivities(c echo.Context, d *mgo.Database) (err error) {
 	if err = ac.Find(bson.M{"status": "active"}).All(&aa); err != nil {
 		return
 	}
-	r := NewResp(aa)
+	re := []Activity{}
+	up := []bson.ObjectId{}
+	now := time.Now().Unix()
+	for _, v := range aa {
+		if now > v.StartTime {
+			up = append(up, v.ID)
+		} else {
+			re = append(re, v)
+		}
+	}
+	sel := bson.M{"_id": bson.M{"$in": up}}
+	doc := bson.M{"$set": bson.M{"status": "expired"}}
+	if len(up) > 0 {
+		if _, err = ac.UpdateAll(sel, doc); err != nil {
+			return
+		}
+	}
+	r := NewResp(re)
 	return c.JSON(http.StatusOK, r)
 }
 
@@ -175,6 +192,31 @@ func LeaveActivity(c echo.Context, d *mgo.Database) (err error) {
 	if f > -1 {
 		a.Attendees = append(a.Attendees[:f], a.Attendees[f+1:]...)
 		a.CurrPpl = len(a.Attendees)
+		if err = ac.UpdateId(id, a); err != nil {
+			return
+		}
+	}
+	r := NewResp(a)
+	return c.JSON(http.StatusOK, r)
+}
+
+func ChangeActivity(c echo.Context, d *mgo.Database) (err error) {
+	u := new(User)
+	if err = GetUser(c, d, u); err != nil {
+		return
+	}
+	id := bson.ObjectIdHex(c.Param("id"))
+	s := c.Param("status")
+	ac := d.C("activity")
+	a := Activity{}
+	if err = ac.FindId(id).One(&a); err != nil {
+		return
+	}
+	if u.Name != a.Initiator {
+		return c.JSON(http.StatusOK, ErrResp("Invalid Operation"))
+	}
+	if a.Status != s {
+		a.Status = s
 		if err = ac.UpdateId(id, a); err != nil {
 			return
 		}
