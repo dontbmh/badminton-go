@@ -1,5 +1,7 @@
 # badminton-go
 
+本项目旨在为羽球活动提供个简单的沟通工具
+
 ## 后端：
 
 golang + echo + mongodb
