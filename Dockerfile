@@ -2,7 +2,7 @@
 FROM golang:latest AS go_builder
 ADD . /app
 WORKDIR /app/server
-ENV https_proxy socks5://10.1.1.233:1080
+# ENV https_proxy socks5://10.1.1.233:1080
 RUN git config --global http.sslVerify false
 RUN go get github.com/labstack/echo
 RUN go get github.com/labstack/echo/middleware
