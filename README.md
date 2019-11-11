@@ -22,10 +22,8 @@ app + mongo containers
 
 ## Docker:
 ``` docker
+git clone https://github.com/dontbmh/badminton-go.git
 docker-compose up -d --build
-docker login
-docker tag badminton-go account/version
-docker push account/version
 ```
 
 临时玩物，BUG多多，希望大家共同学习进步
