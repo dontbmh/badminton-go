@@ -1,21 +1,24 @@
 # badminton-go
 
-# 后端：
+## 后端：
 
 golang + echo + mongodb
+
 涉及RestApi + mgo驱动的增改查
 
-# 前端：
+## 前端：
 
 typescript + react + semantic ui
-涉及react-router + LocalStorage的简单页面
 
-# 部署：
+涉及react-router + LocalStorage的页面
+
+## 部署：
 
 single docker container
-mongo + golang + node
 
-# Docker:
+mongo + golang + node images
+
+## Docker:
 ``` docker
 docker build -t badminton-go .
 docker run -p 3050:8080 -d badminton-go 
