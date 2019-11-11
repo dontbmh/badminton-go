@@ -24,8 +24,8 @@ app + mongo containers
 ``` docker
 docker-compose up -d --build
 docker login
-docker tag golang-echo-react-mongo .
-docker push .
+docker tag badminton-go account/version
+docker push account/version
 ```
 
 临时玩物，BUG多多，希望大家共同学习进步
