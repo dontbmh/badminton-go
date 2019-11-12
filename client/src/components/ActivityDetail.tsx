@@ -98,6 +98,7 @@ class ActivityDetail extends React.Component<IProps> {
     componentDidUpdate(prev: IProps) {
         if (this.props.open && prev.open !== this.props.open) {
             const { context } = this.state;
+            context.stadium = '';
             context.costs = 0;
             context.maxPpl = 8;
             const now = moment();
@@ -140,7 +141,7 @@ class ActivityDetail extends React.Component<IProps> {
                                         timeFormat="HH:mm"
                                         timeIntervals={15}
                                         timeCaption="time"
-                                        dateFormat="yyyy-M-dd hh:mm aa"
+                                        dateFormat="yyyy-MM-dd hh:mm aa"
                                     />
                                 </div>
                                 <div class="field">
@@ -152,7 +153,7 @@ class ActivityDetail extends React.Component<IProps> {
                                         timeFormat="HH:mm"
                                         timeIntervals={15}
                                         timeCaption="time"
-                                        dateFormat="yyyy-M-dd hh:mm aa"
+                                        dateFormat="yyyy-MM-dd hh:mm aa"
                                     />
                                 </div>
                                 <div class="field">

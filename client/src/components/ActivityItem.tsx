@@ -62,7 +62,7 @@ class ActivityItem extends React.Component<IProps> {
                         <a>{`Initiator: ${context.initiator}`}</a>
                     </div>
                     <div class="meta">
-                        <a>{`Commence: ${start.format("HH:mma")}`}</a>
+                        <a>{`Commence: ${start.format("YYYY-MM-DD HH:mma")}`}</a>
                     </div>
                     <div class="meta">
                         <a>{`Duration: about ${duration.toFixed(1)} hour(s)`}</a>
