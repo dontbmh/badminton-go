@@ -43,10 +43,12 @@ class ActivityItem extends React.Component<IProps> {
                 break;
             case 'closed':
                 status = 'red';
+                color = 'grey';
+                disabled = true;
                 break;
             default:
-                color = 'grey';
                 status = 'grey';
+                color = 'grey';
                 disabled = true;
                 break;
         }

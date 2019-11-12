@@ -78,7 +78,7 @@ class ActivityDetail extends React.Component<IProps> {
             error = 'Stadium cannot be empty';
         } else if (context.maxPpl < 2) {
             error = 'Invalid Max Number of People';
-        } else if (context.startTime <  new Date().getTime() / 1000 || context.endTime < context.startTime) {
+        } else if (context.startTime < new Date().getTime() / 1000 || context.endTime < context.startTime) {
             error = 'Invalid time period';
         }
         if (!error) {
@@ -97,13 +97,15 @@ class ActivityDetail extends React.Component<IProps> {
 
     componentDidUpdate(prev: IProps) {
         if (this.props.open && prev.open !== this.props.open) {
-            const { context } = this.state;
-            context.stadium = '';
+            const context = new Activity();
             context.costs = 0;
             context.maxPpl = 8;
-            const now = moment();
-            context.startTime = now.add(1, 'hours').unix();
-            context.endTime = now.add(1, 'hours').unix();
+            const start = moment().add(1, 'days')
+                .startOf('day')
+                .add(18, 'hours')
+                .add(30, 'minutes');
+            context.startTime = start.unix();
+            context.endTime = start.add(1, 'hours').unix();
             this.setState({ context });
         }
     }
