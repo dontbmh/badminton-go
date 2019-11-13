@@ -20,5 +20,5 @@ RUN apk --no-cache add ca-certificates
 COPY --from=go_builder /main ./
 COPY --from=node_builder /build ./static
 RUN chmod +x ./main
-EXPOSE 8080
+EXPOSE 3050
 CMD ./main
