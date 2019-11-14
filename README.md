@@ -22,7 +22,7 @@ app + mongo containers
 
 ## Docker:
 
-Local：
+Local Build：
 ``` docker
 git clone https://github.com/dontbmh/badminton-go.git
 docker-compose up -d --build
