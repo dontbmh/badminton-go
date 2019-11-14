@@ -1,7 +1,7 @@
 version: "3"
 services:
   app:
-    image: dirkzzz/badminton-go-v3
+    image: dirkzzz/badminton-go
     container_name: badminton-go
     restart: always
     ports:
