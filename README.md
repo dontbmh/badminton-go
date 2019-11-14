@@ -30,7 +30,7 @@ docker-compose up -d --build
 
 Docker Hub：
 ``` docker
-curl -o docker-compose.yml https://raw.githubusercontent.com/dontbmh/badminton-go/master/docker-compose.yml
+curl -o docker-compose.yml https://raw.githubusercontent.com/dontbmh/badminton-go/master/docker-compose-nonbuild.yml
 docker-compose up -d
 ```
 
