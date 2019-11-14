@@ -21,9 +21,17 @@ docker-compose.yml
 app + mongo containers
 
 ## Docker:
+
+Local：
 ``` docker
 git clone https://github.com/dontbmh/badminton-go.git
 docker-compose up -d --build
+```
+
+Docker Hub：
+``` docker
+curl -o docker-compose.yml https://github.com/dontbmh/badminton-go/blob/master/docker-compose-nobuild.yml
+docker-compose up -d
 ```
 
 临时玩物，BUG多多，希望大家共同学习进步
